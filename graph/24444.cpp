@@ -8,6 +8,10 @@ vector<vector<int>> graph;
 vector<int> visited;
 int cnt = 1; 
 
+bool compare(const int a, int b) {
+	return a > b;
+}
+
 queue<int> q;
 void bfs() {
     int node;
@@ -48,7 +52,7 @@ int main(void) {
     }
 
     for (int i = 0; i < graph.size(); i++) {
-        sort(graph[i].begin(), graph[i].end());//, compare);
+        sort(graph[i].begin(), graph[i].end()); //, compare);
     }
 
     q.push(r);
