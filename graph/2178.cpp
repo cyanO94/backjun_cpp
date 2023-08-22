@@ -21,9 +21,7 @@ int bfs() {
         q.pop();
 
         if (visited[x][y] != 0) continue;
-        if (x == n -1 && y == m - 1) {
-            break;
-        }
+        visited[x][y] = 1;
 
         for (int i = 0; i < 4; i++) {
             nx = x + dx[i];
@@ -32,12 +30,15 @@ int bfs() {
             if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
 
             if (visited[nx][ny] != 0) {
-                if (visited[x][y] == 0) visited[x][y] = visited[nx][ny] + 1;
-                else if (visited[nx][ny] + 1 < visited[x][y]) {
-                    visited[x][y] = visited[nx][ny] + 1;
+                if (cost[nx][ny] + 1 < cost[x][y]) {
+                    cost[x][y] = cost[nx][ny] + 1;
                 }
             }
-            if (visited[nx][ny] == 0) q.push(make_pair(nx, ny));
+            if (visited[nx][ny] == 0 && map[nx][ny] == '1') q.push(make_pair(nx, ny));
+        }
+
+        if (x == n -1 && y == m - 1) {
+            break;
         }
     }
 
@@ -54,13 +55,13 @@ int main(void) {
     }
 
     visited.assign(n, vector<int>(m, 0));
-    cost.assign(n, vector<int>(m, 0));
+    cost.assign(n, vector<int>(m, 100000));
 
     q.push(make_pair(0,0));
     cost[0][0] = 1;
     int cnt = bfs();
 
-    cout << visited[n-1][m-1] << endl;
+    cout << cost[n-1][m-1] << endl;
 
 
     return 0;    
