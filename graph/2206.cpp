@@ -143,7 +143,7 @@ int main(void) {
     bfs(n, m);
 
     //showVisited(n, m);
-    showCost(n, m);
+    // showCost(n, m);
 
     if (visited[n-1][m-1][0] == 1 || visited[n-1][m-1][1] == 1) {
         if (cost[n-1][m-1][0] == 0) {
